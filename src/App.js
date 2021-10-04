@@ -1,11 +1,16 @@
 import "./App.css";
-import Home from "./pages/home";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Home from "./pages/home/home";
+import Login from "./pages/admin/login";
 
 function App() {
   return (
-    <div>
-      <Home />
-    </div>
+    <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/admin/login" component={Login} />
+        </Switch>
+    </BrowserRouter>
   );
 }
 
