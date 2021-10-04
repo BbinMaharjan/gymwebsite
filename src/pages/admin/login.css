@@ -5,3 +5,11 @@
   margin-top: 100px;
   margin-bottom: 100px;
 }
+
+Label {
+  margin: 10px;
+}
+Input {
+  margin: 10px;
+  padding: 10px;
+}

@@ -36,7 +36,7 @@ const NavBar = (props) => {
                 <DropdownItem>Gym Owner</DropdownItem>
                 <DropdownItem>Gym Member</DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem style={{ background: "skyblue" }}>
+                <DropdownItem style={{ background: "green" }}>
                   <NavLink href="/admin/login">Admin</NavLink>
                 </DropdownItem>
               </DropdownMenu>

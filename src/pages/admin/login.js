@@ -1,8 +1,9 @@
 import React from "react";
 import Footer from "../../components/footer/footer";
 import NavBar from "../../components/NabBar";
-import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
+import { Button, Form, Label, Input } from "reactstrap";
 import "./login.css";
+import Dashboard from "./dashboard";
 
 const Login = (props) => {
   return (
@@ -19,6 +20,13 @@ const Login = (props) => {
             id="Password"
             placeholder="password"
           />
+          <Button
+            color="success"
+            style={{ margin: "10px" }}
+            onClick={() => Dashboard()}
+          >
+            <a href="/admin/dashboard">LOG IN</a>
+          </Button>
         </Form>
       </div>
       <Footer />
