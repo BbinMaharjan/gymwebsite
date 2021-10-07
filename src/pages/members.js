@@ -15,7 +15,8 @@ const Members = () => {
   }, []);
 
   const getMembers = async () => {
-    const res = await axios.get(`${BASE_URL}/admin/gymmembers`);
+    const res = await axios.get(`${BASE_URL}/admin/members`);
+    console.log(JSON.stringify(res.data));
     setMembers(res.data);
   };
   return (
