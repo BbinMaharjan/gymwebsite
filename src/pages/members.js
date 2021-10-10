@@ -2,10 +2,9 @@ import React from "react";
 import axios from "axios";
 import { Card, CardText, CardBody, CardTitle, Button } from "reactstrap";
 import Avater from "../components/Avatar";
+import { BASE_URL } from "../API/config";
 
 import { useEffect, useState } from "react";
-
-const BASE_URL = "http://localhost:8080/gymapi";
 
 const Members = () => {
   const [members, setMembers] = useState([]);
@@ -16,8 +15,7 @@ const Members = () => {
 
   const getMembers = async () => {
     const res = await axios.get(`${BASE_URL}/admin/members`);
-    console.log(JSON.stringify(res.data));
-    setMembers(res.data);
+    setMembers(res.data.Member);
   };
   return (
     <div className="container" style={{ marginTop: "65px" }}>

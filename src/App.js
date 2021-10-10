@@ -7,6 +7,7 @@ import Members from "./pages/members";
 
 import NavBar from "./components/NabBar";
 import Footer from "./components/footer/footer";
+import RegisterAdmin from "./pages/admin/register";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route exact path="/members" component={Members} />
         <Route exact path="/admin/login" component={Login} />
         <Route exact path="/admin/dashboard" component={Dashboard} />
+        <Route exact path="/admin/register" component={RegisterAdmin}/>
       </Switch>
       <Footer />
     </BrowserRouter>
