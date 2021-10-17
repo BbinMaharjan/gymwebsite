@@ -4,12 +4,15 @@ import "./login.css";
 import { Link } from "react-router-dom";
 import admin from "../../image/icon.png";
 import { Image } from "react-bootstrap";
+import NavBar from "../../components/NabBar";
+import Footer from "../../components/footer/footer";
 
 const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   return (
     <>
+      <NavBar />
       <div className="screen">
         <div className="screenleft">
           <Image
@@ -49,6 +52,7 @@ const Login = (props) => {
           </p>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

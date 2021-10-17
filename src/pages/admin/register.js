@@ -4,6 +4,8 @@ import "./login.css";
 import admin from "../../image/icon.png";
 import { Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import NavBar from "../../components/NabBar";
+import Footer from "../../components/footer/footer";
 
 const RegisterAdmin = (props) => {
   const [name, setName] = useState("");
@@ -12,6 +14,7 @@ const RegisterAdmin = (props) => {
   const [mobile, setMobile] = useState("");
   return (
     <>
+      <NavBar />
       <div className="screen">
         <div className="screenleft">
           <Image
@@ -69,6 +72,7 @@ const RegisterAdmin = (props) => {
           </p>
         </div>
       </div>
+      <Footer />
     </>
   );
 };
