@@ -10,6 +10,10 @@ import Footer from "../../components/footer/footer";
 const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleSubmit = () => {
+    alert("User Name Not Found");
+  };
   return (
     <>
       <NavBar />
@@ -24,7 +28,7 @@ const Login = (props) => {
         <div className="screenright">
           <h4>Log In to Admin Dashboard</h4>
           <Image src={admin} className="adminpic" roundedCircle />
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <Label for="Email">Email</Label>
             <Input
               type="email"
@@ -43,9 +47,11 @@ const Login = (props) => {
               onChange={(text) => setPassword(text.target.value)}
               placeholder="password"
             />
-            <Button color="success" style={{ margin: "10px" }}>
-              L O G I N
-            </Button>
+            <Link to="/admin/dashboard">
+              <Button color="success" style={{ margin: "10px" }}>
+                L O G I N
+              </Button>
+            </Link>
           </Form>
           <p>
             Don't have account ? <Link to="/admin/register">Register</Link>{" "}

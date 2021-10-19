@@ -1,14 +1,15 @@
 import React from "react";
 import axios from "axios";
 import { Card, CardText, CardBody, CardTitle, Button } from "reactstrap";
-import Avater from "../components/Avatar";
-import { BASE_URL } from "../API/config";
+import Avater from "../../components/Avatar";
+import { BASE_URL } from "../../API/config";
 
 import { useEffect, useState } from "react";
-import NavBar from "../components/NabBar";
-import Footer from "../components/footer/footer";
 
-const Members = () => {
+import Footer from "../../components/footer/footer";
+import NavbarAdmin from "../../components/Navbar/Navbar";
+
+const GymMembers = () => {
   const [members, setMembers] = useState([]);
 
   useEffect(() => {
@@ -21,9 +22,9 @@ const Members = () => {
   };
   return (
     <>
-      <NavBar />
-      <div className="container" style={{ marginTop: "65px" }}>
-        <h3> All Members</h3>
+      <NavbarAdmin />
+      <div className="container">
+        <h3 style={{ fontFamily: "cursive" }}> All Gym Members</h3>
         {members.map((members) => {
           return (
             <Card key={members._id} className="mt-3">
@@ -55,4 +56,4 @@ const Members = () => {
   );
 };
 
-export default Members;
+export default GymMembers;
