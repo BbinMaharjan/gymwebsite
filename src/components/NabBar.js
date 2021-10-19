@@ -13,6 +13,9 @@ import {
   DropdownItem,
 } from "reactstrap";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDumbbell, faHome, faUsers } from "@fortawesome/free-solid-svg-icons";
+
 import { Link } from "react-router-dom";
 
 const NavBar = (props) => {
@@ -23,30 +26,44 @@ const NavBar = (props) => {
   return (
     <div>
       <Navbar color="dark" dark expand="md" fixed="top">
-        <NavbarBrand href="/">My Gym</NavbarBrand>
+        <NavbarBrand href="/" style={{ marginLeft: "10px" }}>
+          <FontAwesomeIcon icon={faDumbbell} style={{ marginRight: "5px" }} />
+          My Gym
+        </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
               <Link to="/">
-                <NavLink>Home</NavLink>
+                <NavLink>
+                  {" "}
+                  <FontAwesomeIcon
+                    icon={faHome}
+                    style={{ marginRight: "5px" }}
+                  />
+                  Home
+                </NavLink>
               </Link>
             </NavItem>
-            <NavItem>
-              <Link to="/members">
-                <NavLink>Members</NavLink>
-              </Link>
-            </NavItem>
-            <UncontrolledDropdown inNavbar>
+            <UncontrolledDropdown
+              inNavbar
+              style={{ position: "fixed", right: 80 }}
+            >
               <DropdownToggle nav caret>
+                <FontAwesomeIcon
+                  icon={faUsers}
+                  style={{ marginRight: "5px" }}
+                />
                 SIGN IN
               </DropdownToggle>
-              <DropdownMenu right>
+              <DropdownMenu>
                 <DropdownItem>Gym Owner</DropdownItem>
                 <DropdownItem>Gym Member</DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem style={{ background: "green" }}>
-                  <NavLink href="/admin/login">Admin</NavLink>
+                <DropdownItem style={{ backgroundColor: "green" }}>
+                  <Link to="/admin/login">
+                    <NavLink>Admin</NavLink>
+                  </Link>
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
