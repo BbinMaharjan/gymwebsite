@@ -15,7 +15,7 @@ const Dashboard = (props) => {
   return (
     <>
       <DrawerAdmin />
-      <Typography variant="h3" align="center">
+      <Typography variant="h4" align="center">
         {" "}
         Wellcome Admin !!
       </Typography>
@@ -29,7 +29,12 @@ const Dashboard = (props) => {
           padding: "5px",
         }}
       >
-        <CardView color="info" image={treadmill} title=" Gym  Owners" />
+        <Link
+          to="/admin/gymowners"
+          style={{ color: "skyblue", fontWeight: "lighter" }}
+        >
+          <CardView color="info" image={treadmill} title=" Gym  Owners" />
+        </Link>
         <Link
           to="/admin/gymmembers"
           style={{ color: "GrayText", fontWeight: "lighter" }}

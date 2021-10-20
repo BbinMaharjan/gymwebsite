@@ -15,7 +15,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-
+import Links from "@mui/material/Link";
 import { Link } from "react-router-dom";
 
 import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
@@ -146,12 +146,14 @@ export default function MiniDrawer() {
               <ListItemText primary="Admin Dashboard" />
             </ListItem>
           </Link>
-          <ListItem button>
-            <ListItemIcon>
-              <AdminPanelSettingsRoundedIcon />
-            </ListItemIcon>
-            <ListItemText primary="Gym Owners" />
-          </ListItem>
+          <Link to="/admin/gymowners">
+            <ListItem button>
+              <ListItemIcon>
+                <AdminPanelSettingsRoundedIcon />
+              </ListItemIcon>
+              <ListItemText primary="Gym Owners" />
+            </ListItem>
+          </Link>
           <Link to="/admin/gymmembers">
             <ListItem button>
               <ListItemIcon>
@@ -175,14 +177,14 @@ export default function MiniDrawer() {
         </List>
         <Divider />
         <List>
-          <Link to="/">
+          <Links href="/">
             <ListItem button>
               <ListItemIcon>
                 <LogoutRoundedIcon />
               </ListItemIcon>
               <ListItemText primary="Admin Log Out" />
             </ListItem>
-          </Link>
+          </Links>
         </List>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
