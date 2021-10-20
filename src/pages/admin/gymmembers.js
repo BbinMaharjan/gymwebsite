@@ -1,7 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Card, CardText, CardBody, CardTitle, Button } from "reactstrap";
-import Avater from "../../components/Avatar";
+
 import { BASE_URL } from "../../API/config";
 
 import { useEffect, useState } from "react";
@@ -10,6 +9,9 @@ import { Typography } from "@mui/material";
 
 import Footer from "../../components/footer/footer";
 import DrawerAdmin from "../../components/Drawer/Drawer";
+
+import Avatar from "react-avatar";
+import { Table } from "reactstrap";
 
 const GymMembers = () => {
   const [members, setMembers] = useState([]);
@@ -30,31 +32,45 @@ const GymMembers = () => {
           {" "}
           All Gym Members
         </Typography>
-        {members.map((members) => {
-          return (
-            <Card key={members._id} className="mt-3">
-              <Avater name={members.name} style={{ marginleft: "10px" }} />
-              <CardBody style={{ textAlign: "center" }}>
-                <CardTitle tag="h5"> {members.name} </CardTitle>
-                <CardText>
-                  {" "}
-                  <label tag="h2" style={{ marginRight: "5px" }}>
-                    Email:
-                  </label>
-                  {members.email}
-                </CardText>
-                <CardText>
-                  {" "}
-                  <label tag="h2" style={{ marginRight: "5px" }}>
-                    Address:
-                  </label>
-                  {members.address}
-                </CardText>
-              </CardBody>
-              <Button color="primary">View Profile</Button>
-            </Card>
-          );
-        })}
+        <Table striped bordered style={{ marginTop: "10px" }}>
+          <thead
+            style={{
+              background: "green",
+              color: "ghostwhite",
+              textAlign: "center",
+            }}
+          >
+            <tr>
+              <th>Id</th>
+              <th>DP</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Address</th>
+              <th>Mobile</th>
+            </tr>
+          </thead>
+          <tbody
+            style={{
+              textAlign: "center",
+            }}
+          >
+            {members.map((members) => {
+              return (
+                <tr key={members.id}>
+                  <th scope="row">{members.membershipNo}</th>
+                  <td>
+                    {" "}
+                    <Avatar name={members.name} size="40" round={true} />
+                  </td>
+                  <td>{members.name}</td>
+                  <td>{members.email}</td>
+                  <td>{members.address}</td>
+                  <td>{members.mobile}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </Table>
       </div>
       <Footer />
     </>
