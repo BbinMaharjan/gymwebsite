@@ -6,8 +6,10 @@ import { BASE_URL } from "../../API/config";
 
 import { useEffect, useState } from "react";
 
+import { Typography } from "@mui/material";
+
 import Footer from "../../components/footer/footer";
-import NavbarAdmin from "../../components/Navbar/Navbar";
+import DrawerAdmin from "../../components/Drawer/Drawer";
 
 const GymMembers = () => {
   const [members, setMembers] = useState([]);
@@ -22,9 +24,12 @@ const GymMembers = () => {
   };
   return (
     <>
-      <NavbarAdmin />
+      <DrawerAdmin />
       <div className="container">
-        <h3 style={{ fontFamily: "cursive" }}> All Gym Members</h3>
+        <Typography variant="h4" align="center">
+          {" "}
+          All Gym Members
+        </Typography>
         {members.map((members) => {
           return (
             <Card key={members._id} className="mt-3">

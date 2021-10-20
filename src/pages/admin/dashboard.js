@@ -15,7 +15,7 @@ const Dashboard = (props) => {
   return (
     <>
       <DrawerAdmin />
-      <Typography variant="h4" align="center">
+      <Typography variant="h3" align="center">
         {" "}
         Wellcome Admin !!
       </Typography>

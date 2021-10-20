@@ -16,6 +16,8 @@ import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 
+import { Link } from "react-router-dom";
+
 import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
 import FitnessCenterRoundedIcon from "@mui/icons-material/FitnessCenterRounded";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
@@ -136,31 +138,35 @@ export default function MiniDrawer() {
         </DrawerHeader>
         <Divider />
         <List>
-          <ListItem>
-            <ListItemIcon>
-              <DashboardRoundedIcon />
-            </ListItemIcon>
-            <ListItemText primary="Admin Dashboard" />
-          </ListItem>
-          <ListItem>
+          <Link to="/admin/dashboard">
+            <ListItem button>
+              <ListItemIcon>
+                <DashboardRoundedIcon />
+              </ListItemIcon>
+              <ListItemText primary="Admin Dashboard" />
+            </ListItem>
+          </Link>
+          <ListItem button>
             <ListItemIcon>
               <AdminPanelSettingsRoundedIcon />
             </ListItemIcon>
             <ListItemText primary="Gym Owners" />
           </ListItem>
-          <ListItem>
-            <ListItemIcon>
-              <AccountCircleIcon />
-            </ListItemIcon>
-            <ListItemText primary="Gym Members" />
-          </ListItem>
-          <ListItem>
+          <Link to="/admin/gymmembers">
+            <ListItem button>
+              <ListItemIcon>
+                <AccountCircleIcon />
+              </ListItemIcon>
+              <ListItemText primary="Gym Members" />
+            </ListItem>
+          </Link>
+          <ListItem button>
             <ListItemIcon>
               <FitnessCenterRoundedIcon />
             </ListItemIcon>
             <ListItemText primary="Gym Exercises" />
           </ListItem>
-          <ListItem>
+          <ListItem button>
             <ListItemIcon>
               <SettingsIcon />
             </ListItemIcon>
@@ -169,12 +175,14 @@ export default function MiniDrawer() {
         </List>
         <Divider />
         <List>
-          <ListItem>
-            <ListItemIcon>
-              <LogoutRoundedIcon />
-            </ListItemIcon>
-            <ListItemText primary="Admin Log Out" />
-          </ListItem>
+          <Link to="/">
+            <ListItem button>
+              <ListItemIcon>
+                <LogoutRoundedIcon />
+              </ListItemIcon>
+              <ListItemText primary="Admin Log Out" />
+            </ListItem>
+          </Link>
         </List>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
