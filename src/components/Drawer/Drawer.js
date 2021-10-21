@@ -24,6 +24,10 @@ import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import SettingsIcon from "@mui/icons-material/Settings";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AdminPanelSettingsRoundedIcon from "@mui/icons-material/AdminPanelSettingsRounded";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+
+import Avatar from "@mui/material/Avatar";
+import { deepOrange } from "@mui/material/colors";
 
 const drawerWidth = 240;
 
@@ -124,6 +128,15 @@ export default function MiniDrawer() {
           <Typography variant="h6" noWrap component="div">
             Admin Dashboard
           </Typography>
+          <IconButton color="inherit" aria-label="open drawer" edge="start">
+            <AccountCircle
+              sx={{
+                height: 40,
+                width: 40,
+              }}
+              style={{ position: "fixed", right: 20 }}
+            />
+          </IconButton>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -136,6 +149,20 @@ export default function MiniDrawer() {
             )}
           </IconButton>
         </DrawerHeader>
+
+        <Avatar
+          sx={{ bgcolor: deepOrange[800], width: 50, height: 50 }}
+          style={{ position: "absolute", margin: "10px" }}
+        >
+          AD
+        </Avatar>
+        <Typography
+          variant="h5"
+          style={{ position: "absolute", right: 100, top: 10 }}
+        >
+          Name
+        </Typography>
+
         <Divider />
         <List>
           <Link to="/admin/dashboard">
