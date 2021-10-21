@@ -189,12 +189,14 @@ export default function MiniDrawer() {
               <ListItemText primary="Gym Members" />
             </ListItem>
           </Link>
-          <ListItem button>
-            <ListItemIcon>
-              <FitnessCenterRoundedIcon />
-            </ListItemIcon>
-            <ListItemText primary="Gym Exercises" />
-          </ListItem>
+          <Link to="/admin/gymexercises">
+            <ListItem button>
+              <ListItemIcon>
+                <FitnessCenterRoundedIcon />
+              </ListItemIcon>
+              <ListItemText primary="Gym Exercises" />
+            </ListItem>
+          </Link>
           <ListItem button>
             <ListItemIcon>
               <SettingsIcon />

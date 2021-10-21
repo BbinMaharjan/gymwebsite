@@ -6,6 +6,7 @@ import RegisterAdmin from "../pages/admin/register";
 import Dashboard from "../pages/admin/dashboard";
 import GymMembers from "../pages/admin/gymmembers";
 import GymOwner from "../pages/admin/gymOwners";
+import GymExercise from "../pages/admin/gymExercise";
 
 const AdminRoutes = (props) => {
   return (
@@ -16,6 +17,7 @@ const AdminRoutes = (props) => {
         <Route exact path="/admin/dashboard" component={Dashboard} />
         <Route exact path="/admin/gymowners" component={GymOwner} />
         <Route exact path="/admin/gymmembers" component={GymMembers} />
+        <Route exact path="/admin/gymexercises" component={GymExercise} />
       </Switch>
     </BrowserRouter>
   );

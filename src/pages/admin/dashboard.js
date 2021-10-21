@@ -41,7 +41,12 @@ const Dashboard = (props) => {
         >
           <CardView color="success" image={man} title="Gym Members" />
         </Link>
-        <CardView color="danger" image={people} title="Gym Exercises" />
+        <Link
+          to="/admin/gymexercises"
+          style={{ color: "GrayText", fontWeight: "lighter" }}
+        >
+          <CardView color="danger" image={people} title="Gym Exercises" />
+        </Link>
         <CardView color="secondary" image={gymsport} title="Gym Settings" />
       </div>
       <Footer />
