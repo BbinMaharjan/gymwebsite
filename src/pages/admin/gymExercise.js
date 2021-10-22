@@ -7,7 +7,9 @@ import Footer from "../../components/footer/footer";
 
 import Avatar from "react-avatar";
 import { Table } from "reactstrap";
-import CardView from "../../components/Card/Card";
+import CardViews from "../../components/Card/CardMU";
+
+import Gymimg from "../../image/man.png";
 
 const GymExercise = (props) => {
   return (
@@ -51,7 +53,16 @@ const GymExercise = (props) => {
             </tr>
           </tbody>
         </Table>
-        <CardView />
+        <CardViews
+          image={Gymimg}
+          title="Chest"
+          dec=" Incline Dumbell Bench Press"
+        />
+        <CardViews
+          image={Gymimg}
+          title="Chest"
+          dec=" Incline Dumbell Bench Press"
+        />
       </div>
       <Footer />
     </>
