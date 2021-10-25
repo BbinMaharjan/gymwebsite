@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 
-import { BASE_URL } from "../../API/config";
+import { AdminToken, BASE_URL } from "../../API/config";
 
 import { useEffect, useState } from "react";
 
@@ -13,6 +13,9 @@ import DrawerAdmin from "../../components/Drawer/Drawer";
 import Avatar from "react-avatar";
 import { Table } from "reactstrap";
 
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
+
 const GymMembers = () => {
   const [members, setMembers] = useState([]);
 
@@ -21,7 +24,9 @@ const GymMembers = () => {
   }, []);
 
   const getMembers = async () => {
-    const res = await axios.get(`${BASE_URL}/admin/members`);
+    const res = await axios.get(`${BASE_URL}/admin/gymmembers`, {
+      headers: { Authorization: `Bearer ${AdminToken}` },
+    });
     setMembers(res.data.Member);
   };
   return (
@@ -71,6 +76,9 @@ const GymMembers = () => {
             })}
           </tbody>
         </Table>
+        <Stack spacing={2} alignItems="center">
+          <Pagination count={3} color="secondary" />
+        </Stack>
       </div>
       <Footer />
     </>

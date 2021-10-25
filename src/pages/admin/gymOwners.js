@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
 
+import { AdminToken, BASE_URL, API_ROOT } from "../../API/config";
+
 import { Typography } from "@mui/material";
 
 import DrawerAdmin from "../../components/Drawer/Drawer";
@@ -9,21 +11,22 @@ import Footer from "../../components/footer/footer";
 import Avatar from "react-avatar";
 import { Table } from "reactstrap";
 import { useEffect, useState } from "react";
+
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
-const BASE_URL = "https://reqres.in/api";
-
 const GymOwner = (props) => {
-  const [users, setUsers] = useState([]);
+  const [gymOwner, setGymOwner] = useState([]);
 
   useEffect(() => {
-    getUsers();
+    getGymOwners();
   }, []);
 
-  const getUsers = async () => {
-    const res = await axios.get(`${BASE_URL}/users?page=1`);
-    setUsers(res.data.data);
+  const getGymOwners = async () => {
+    const res = await axios.get(`${BASE_URL}/admin/gymowners`, {
+      headers: { Authorization: `Bearer ${AdminToken}` },
+    });
+    setGymOwner(res.data.result);
   };
   return (
     <>
@@ -48,6 +51,8 @@ const GymOwner = (props) => {
               <th>Email</th>
               <th>Address</th>
               <th>Mobile</th>
+              <th>Gym Title</th>
+              <th>Gym Location</th>
             </tr>
           </thead>
           <tbody
@@ -55,18 +60,24 @@ const GymOwner = (props) => {
               textAlign: "center",
             }}
           >
-            {users.map((users) => {
+            {gymOwner.map((gymOwner) => {
               return (
-                <tr key={users.id}>
-                  <th scope="row">{users.id}</th>
+                <tr key={gymOwner.id}>
+                  <th scope="row">{gymOwner.id}</th>
                   <td>
                     {" "}
-                    <Avatar src={users.avatar} size="40" round={true} />
+                    <Avatar
+                      src={`${API_ROOT}/public/images/gymowner/${gymOwner.image}`}
+                      size="40"
+                      round={true}
+                    />
                   </td>
-                  <td>{users.first_name}</td>
-                  <td>{users.email}</td>
-                  <td>{users.email}</td>
-                  <td>9843221133</td>
+                  <td>{gymOwner.name}</td>
+                  <td>{gymOwner.email}</td>
+                  <td>{gymOwner.email}</td>
+                  <td>{gymOwner.mobile}</td>
+                  <td>{gymOwner.gymTitle}</td>
+                  <td>{gymOwner.gymLocation}</td>
                 </tr>
               );
             })}

@@ -6,13 +6,18 @@ import admin from "../../image/icon.png";
 import { Image } from "react-bootstrap";
 import NavBar from "../../components/NabBar";
 import Footer from "../../components/footer/footer";
+import { useHistory } from "react-router-dom";
 
 const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const history = useHistory();
   const handleSubmit = () => {
-    alert("User Name Not Found");
+    if (email === "admin@gmail.com" && password === "12345") {
+      history.push("/admin/dashboard");
+    } else {
+      alert("User Not Found");
+    }
   };
   return (
     <>
@@ -47,11 +52,9 @@ const Login = (props) => {
               onChange={(text) => setPassword(text.target.value)}
               placeholder="password"
             />
-            <Link to="/admin/dashboard">
-              <Button color="success" style={{ margin: "10px" }}>
-                L O G I N
-              </Button>
-            </Link>
+            <Button color="success" style={{ margin: "10px" }}>
+              L O G I N
+            </Button>
           </Form>
           <p>
             Don't have account ? <Link to="/admin/register">Register</Link>{" "}

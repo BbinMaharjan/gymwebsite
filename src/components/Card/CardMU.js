@@ -4,6 +4,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
 
 const CardViews = (props) => {
   return (
@@ -16,7 +17,7 @@ const CardViews = (props) => {
         borderBottomStyle: "solid",
         borderRightColor: "red",
         borderRightStyle: "solid",
-        marginBottom: "10px",
+        marginBottom: "20px",
         borderRadius: "20px",
       }}
     >
@@ -37,6 +38,14 @@ const CardViews = (props) => {
             component="div"
           >
             {props.dec}
+          </Typography>
+          <Divider />
+          <Typography
+            variant="subtitle1"
+            color="text.secondary"
+            component="div"
+          >
+            {props.addBy}
           </Typography>
         </CardContent>
       </Box>

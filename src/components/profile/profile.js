@@ -100,10 +100,10 @@ const UI = (props) => {
             PERSONAL INFORMATION
           </Typography>
           <Divider />
-          <TextLable icon="info" lable="ID" title="0000125XCA45" />
-          <TextLable icon="person" lable="NAME" title="Leon Hart" />
-          <TextLable icon="email" lable="Email" title="Leon@gmail.com" />
-          <TextLable icon="phone" lable="MOBILE" title="98XX-XXX-XXX" />
+          <TextLable icon="info" lable="ID" title={props.id} />
+          <TextLable icon="person" lable="NAME" title={props.name} />
+          <TextLable icon="email" lable="Email" title={props.email} />
+          <TextLable icon="phone" lable="MOBILE" title={props.mobile} />
         </div>
       </div>
     </>

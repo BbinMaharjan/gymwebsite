@@ -1,17 +1,35 @@
 import React from "react";
+import axios from "axios";
+
+import { AdminToken, BASE_URL } from "../../API/config";
 
 import { Typography } from "@mui/material";
 
 import DrawerAdmin from "../../components/Drawer/Drawer";
 import Footer from "../../components/footer/footer";
 
-import Avatar from "react-avatar";
-import { Table } from "reactstrap";
 import CardViews from "../../components/Card/CardMU";
 
 import Gymimg from "../../image/man.png";
+import { useEffect, useState } from "react";
+
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 
 const GymExercise = (props) => {
+  const [gymExercise, setGymExercise] = useState([]);
+
+  useEffect(() => {
+    getGymExercises();
+  }, []);
+
+  const getGymExercises = async () => {
+    const res = await axios.get(`${BASE_URL}/admin/gymexercise`, {
+      headers: { Authorization: `Bearer ${AdminToken}` },
+    });
+    setGymExercise(res.data.result);
+  };
+  console.log(gymExercise);
   return (
     <>
       <DrawerAdmin />
@@ -20,49 +38,19 @@ const GymExercise = (props) => {
           {" "}
           Gym Exercises
         </Typography>
-        <Table striped bordered style={{ marginTop: "10px" }}>
-          <thead
-            style={{
-              background: "#ad1753",
-              color: "ghostwhite",
-              textAlign: "center",
-            }}
-          >
-            <tr>
-              <th>Id</th>
-              <th>Image</th>
-              <th>Exercises Title</th>
-              <th>Description</th>
-              <th>Added By</th>
-            </tr>
-          </thead>
-          <tbody
-            style={{
-              textAlign: "center",
-            }}
-          >
-            <tr>
-              <th scope="row">1</th>
-              <td>
-                {" "}
-                <Avatar name="Chest" size="40" round={true} />
-              </td>
-              <td>Chest</td>
-              <td>Incline Dumbbell Bench Press</td>
-              <td>Leon Maharjan</td>
-            </tr>
-          </tbody>
-        </Table>
-        <CardViews
-          image={Gymimg}
-          title="Chest"
-          dec=" Incline Dumbell Bench Press"
-        />
-        <CardViews
-          image={Gymimg}
-          title="Chest"
-          dec=" Incline Dumbell Bench Press"
-        />
+        {gymExercise.map((gymExercise) => {
+          return (
+            <CardViews
+              image={Gymimg}
+              title={gymExercise.exerciseTitle}
+              dec={gymExercise.exerciseDescription}
+              addBy={gymExercise.gymOwner.name}
+            />
+          );
+        })}
+        <Stack spacing={2} alignItems="center">
+          <Pagination count={2} color="secondary" />
+        </Stack>
       </div>
       <Footer />
     </>
