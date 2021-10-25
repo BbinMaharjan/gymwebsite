@@ -213,7 +213,13 @@ export default function MiniDrawer() {
               <ListItemIcon>
                 <LogoutRoundedIcon />
               </ListItemIcon>
-              <ListItemText primary="Admin Log Out" />
+              <ListItemText
+                primary="Admin Log Out"
+                onClick={() => {
+                  localStorage.removeItem("token");
+                  console.log("click");
+                }}
+              />
             </ListItem>
           </Links>
         </List>

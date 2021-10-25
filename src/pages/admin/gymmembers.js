@@ -25,7 +25,7 @@ const GymMembers = () => {
 
   const getMembers = async () => {
     const res = await axios.get(`${BASE_URL}/admin/gymmembers`, {
-      headers: { Authorization: `Bearer ${AdminToken}` },
+      headers: { Authorization: `${AdminToken}` },
     });
     setMembers(res.data.Member);
   };

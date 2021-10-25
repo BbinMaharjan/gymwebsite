@@ -19,7 +19,7 @@ const Profile = (props) => {
 
   const getAdmin = async () => {
     const res = await axios.get(`${BASE_URL}/admin/adminprofile`, {
-      headers: { Authorization: `Bearer ${AdminToken}` },
+      headers: { Authorization: `${AdminToken}` },
     });
     setAdmin(res.data.result);
   };

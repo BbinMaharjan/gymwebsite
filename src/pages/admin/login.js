@@ -7,18 +7,29 @@ import { Image } from "react-bootstrap";
 import NavBar from "../../components/NabBar";
 import Footer from "../../components/footer/footer";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
+
+import { BASE_URL } from "../../API/config";
 
 const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
-  const handleSubmit = () => {
-    if (email === "admin@gmail.com" && password === "12345") {
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const res = await axios.post(`${BASE_URL}/admin/login`, {
+      email,
+      password,
+    });
+    if (res.data.token) {
+      localStorage.setItem("token", res.data.token);
       history.push("/admin/dashboard");
     } else {
-      alert("User Not Found");
+      alert("user not exit");
     }
   };
+
   return (
     <>
       <NavBar />

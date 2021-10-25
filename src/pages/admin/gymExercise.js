@@ -25,11 +25,10 @@ const GymExercise = (props) => {
 
   const getGymExercises = async () => {
     const res = await axios.get(`${BASE_URL}/admin/gymexercise`, {
-      headers: { Authorization: `Bearer ${AdminToken}` },
+      headers: { Authorization: `${AdminToken}` },
     });
     setGymExercise(res.data.result);
   };
-  console.log(gymExercise);
   return (
     <>
       <DrawerAdmin />
@@ -41,6 +40,7 @@ const GymExercise = (props) => {
         {gymExercise.map((gymExercise) => {
           return (
             <CardViews
+              key={gymExercise._id}
               image={Gymimg}
               title={gymExercise.exerciseTitle}
               dec={gymExercise.exerciseDescription}

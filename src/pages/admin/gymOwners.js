@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 
-import { AdminToken, BASE_URL, API_ROOT } from "../../API/config";
+import { BASE_URL, AdminToken } from "../../API/config";
 
 import { Typography } from "@mui/material";
 
@@ -24,8 +24,9 @@ const GymOwner = (props) => {
 
   const getGymOwners = async () => {
     const res = await axios.get(`${BASE_URL}/admin/gymowners`, {
-      headers: { Authorization: `Bearer ${AdminToken}` },
+      headers: { Authorization: `${AdminToken}` },
     });
+    //console.log("get gym owners", res);
     setGymOwner(res.data.result);
   };
   return (
@@ -66,11 +67,7 @@ const GymOwner = (props) => {
                   <th scope="row">{gymOwner.id}</th>
                   <td>
                     {" "}
-                    <Avatar
-                      src={`${API_ROOT}/public/images/gymowner/${gymOwner.image}`}
-                      size="40"
-                      round={true}
-                    />
+                    <Avatar name={gymOwner.name} size="40" round={true} />
                   </td>
                   <td>{gymOwner.name}</td>
                   <td>{gymOwner.email}</td>
