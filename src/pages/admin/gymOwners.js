@@ -9,14 +9,21 @@ import DrawerAdmin from "../../components/Drawer/Drawer";
 import Footer from "../../components/footer/footer";
 
 import Avatar from "react-avatar";
-import { Table } from "reactstrap";
+import { Table, Button, Form, Label, Input } from "reactstrap";
 import { useEffect, useState } from "react";
 
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
+import { Modal } from "react-bootstrap";
+
 const GymOwner = (props) => {
   const [gymOwner, setGymOwner] = useState([]);
+  const [newgymTitle, setgymTitle] = useState([]);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     getGymOwners();
@@ -29,6 +36,18 @@ const GymOwner = (props) => {
     //console.log("get gym owners", res);
     setGymOwner(res.data.result);
   };
+
+  // const handelUpdate = async (id) => {
+  //   const res = await axios.put(
+  //     `${BASE_URL}/admin/gymowners/updategymowner/${id}`,
+  //     { gymTitle: newgymTitle },
+  //     {
+  //       headers: { Authorization: `${AdminToken}` },
+  //     }
+  //   );
+  //   console.log(res);
+  // };
+
   return (
     <>
       <DrawerAdmin />
@@ -50,10 +69,10 @@ const GymOwner = (props) => {
               <th>DP</th>
               <th>Name</th>
               <th>Email</th>
-              <th>Address</th>
               <th>Mobile</th>
               <th>Gym Title</th>
               <th>Gym Location</th>
+              <th>Update</th>
             </tr>
           </thead>
           <tbody
@@ -71,15 +90,45 @@ const GymOwner = (props) => {
                   </td>
                   <td>{gymOwner.name}</td>
                   <td>{gymOwner.email}</td>
-                  <td>{gymOwner.email}</td>
                   <td>{gymOwner.mobile}</td>
                   <td>{gymOwner.gymTitle}</td>
                   <td>{gymOwner.gymLocation}</td>
+                  <td>
+                    <Button color="info" onClick={handleShow(gymOwner.id)}>
+                      Update
+                    </Button>
+                  </td>
                 </tr>
               );
             })}
           </tbody>
         </Table>
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Update Gym Owner</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form>
+              <Label for="gymTitle">New Gym Title</Label>
+              <Input
+                type="gymTitle"
+                name="gymTitle"
+                id="gymTitle"
+                value={newgymTitle}
+                onChange={(text) => setgymTitle(text.target.value)}
+                placeholder="new"
+              />
+              <Button color="success" style={{ margin: "10px" }}>
+                UPDATE
+              </Button>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
         <Stack spacing={2} alignItems="center">
           <Pagination count={2} color="secondary" />
         </Stack>
