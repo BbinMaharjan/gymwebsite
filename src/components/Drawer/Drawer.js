@@ -15,8 +15,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import Links from "@mui/material/Link";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
 import FitnessCenterRoundedIcon from "@mui/icons-material/FitnessCenterRounded";
@@ -99,7 +98,7 @@ const Drawer = styled(MuiDrawer, {
 export default function MiniDrawer() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-
+  const history = useHistory();
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -165,63 +164,55 @@ export default function MiniDrawer() {
 
         <Divider />
         <List>
-          <Link to="/admin/dashboard">
-            <ListItem button>
-              <ListItemIcon>
-                <DashboardRoundedIcon />
-              </ListItemIcon>
-              <ListItemText primary="Admin Dashboard" />
-            </ListItem>
-          </Link>
-          <Link to="/admin/gymowners">
-            <ListItem button>
-              <ListItemIcon>
-                <AdminPanelSettingsRoundedIcon />
-              </ListItemIcon>
-              <ListItemText primary="Gym Owners" />
-            </ListItem>
-          </Link>
-          <Link to="/admin/gymmembers">
-            <ListItem button>
-              <ListItemIcon>
-                <AccountCircleIcon />
-              </ListItemIcon>
-              <ListItemText primary="Gym Members" />
-            </ListItem>
-          </Link>
-          <Link to="/admin/gymexercises">
-            <ListItem button>
-              <ListItemIcon>
-                <FitnessCenterRoundedIcon />
-              </ListItemIcon>
-              <ListItemText primary="Gym Exercises" />
-            </ListItem>
-          </Link>
-          <Link to="/admin/profile">
-            <ListItem button>
-              <ListItemIcon>
-                <SettingsIcon />
-              </ListItemIcon>
-              <ListItemText primary="Gym Settings" />
-            </ListItem>
-          </Link>
+          <ListItem button onClick={() => history.push("/admin/dashboard")}>
+            <ListItemIcon>
+              <DashboardRoundedIcon />
+            </ListItemIcon>
+            <ListItemText primary="Admin Dashboard" />
+          </ListItem>
+
+          <ListItem button onClick={() => history.push("/admin/gymowners")}>
+            <ListItemIcon>
+              <AdminPanelSettingsRoundedIcon />
+            </ListItemIcon>
+            <ListItemText primary="Gym Owners" />
+          </ListItem>
+
+          <ListItem button onClick={() => history.push("/admin/gymmembers")}>
+            <ListItemIcon>
+              <AccountCircleIcon />
+            </ListItemIcon>
+            <ListItemText primary="Gym Members" />
+          </ListItem>
+
+          <ListItem button onClick={() => history.push("/admin/gymexercises")}>
+            <ListItemIcon>
+              <FitnessCenterRoundedIcon />
+            </ListItemIcon>
+            <ListItemText primary="Gym Exercises" />
+          </ListItem>
+
+          <ListItem button onClick={() => history.push("/admin/profile")}>
+            <ListItemIcon>
+              <SettingsIcon />
+            </ListItemIcon>
+            <ListItemText primary="Gym Settings" />
+          </ListItem>
         </List>
         <Divider />
         <List>
-          <Links href="/">
-            <ListItem button>
-              <ListItemIcon>
-                <LogoutRoundedIcon />
-              </ListItemIcon>
-              <ListItemText
-                primary="Admin Log Out"
-                onClick={() => {
-                  localStorage.removeItem("token");
-                  console.log("click");
-                }}
-              />
-            </ListItem>
-          </Links>
+          <ListItem
+            button
+            onClick={() => {
+              localStorage.removeItem("token");
+              window.location.href = "/";
+            }}
+          >
+            <ListItemIcon>
+              <LogoutRoundedIcon />
+            </ListItemIcon>
+            <ListItemText primary="Admin Log Out" />
+          </ListItem>
         </List>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>

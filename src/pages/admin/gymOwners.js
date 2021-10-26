@@ -63,7 +63,7 @@ const GymOwner = (props) => {
           >
             {gymOwner.map((gymOwner) => {
               return (
-                <tr key={gymOwner.id}>
+                <tr key={gymOwner._id}>
                   <th scope="row">{gymOwner.id}</th>
                   <td>
                     {" "}

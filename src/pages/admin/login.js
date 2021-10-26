@@ -22,11 +22,12 @@ const Login = (props) => {
       email,
       password,
     });
+    console.log(res);
     if (res.data.token) {
-      localStorage.setItem("token", res.data.token);
+      await localStorage.setItem("token", res.data.token);
       history.push("/admin/dashboard");
     } else {
-      alert("user not exit");
+      alert("User Not Found");
     }
   };
 

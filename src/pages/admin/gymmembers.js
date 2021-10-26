@@ -61,7 +61,7 @@ const GymMembers = () => {
           >
             {members.map((members) => {
               return (
-                <tr key={members.id}>
+                <tr key={members._id}>
                   <th scope="row">{members.membershipNo}</th>
                   <td>
                     {" "}
