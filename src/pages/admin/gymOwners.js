@@ -23,7 +23,9 @@ const GymOwner = (props) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = async (id) => {
+    setShow(true);
+  };
 
   useEffect(() => {
     getGymOwners();
@@ -47,7 +49,6 @@ const GymOwner = (props) => {
   //   );
   //   console.log(res);
   // };
-
   return (
     <>
       <DrawerAdmin />
@@ -94,7 +95,7 @@ const GymOwner = (props) => {
                   <td>{gymOwner.gymTitle}</td>
                   <td>{gymOwner.gymLocation}</td>
                   <td>
-                    <Button color="info" onClick={handleShow(gymOwner.id)}>
+                    <Button color="info" onClick={handleShow}>
                       Update
                     </Button>
                   </td>

@@ -6,11 +6,10 @@ import GymMembers from "../pages/admin/gymmembers";
 import GymOwner from "../pages/admin/gymOwners";
 import GymExercise from "../pages/admin/gymExercise";
 import Profile from "../pages/admin/profile";
-import Home from "../pages/home/home";
 
 const AdminRoutes = (props) => {
   if (!localStorage.getItem("token")) {
-    return <Home />;
+    return (window.location.href = "/");
   }
   return (
     <BrowserRouter>
