@@ -8,16 +8,21 @@ import RegisterAdmin from "./pages/admin/register";
 
 import AdminRoutes from "./routes/adminroutes";
 
+import { Provider } from "react-redux";
+import store from "./store/index";
+
 function App() {
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/admin/login" component={Login} />
-        <Route exact path="/admin/register" component={RegisterAdmin} />
-        <AdminRoutes />
-      </Switch>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/admin/login" component={Login} />
+          <Route exact path="/admin/register" component={RegisterAdmin} />
+          <AdminRoutes />
+        </Switch>
+      </BrowserRouter>
+    </Provider>
   );
 }
 

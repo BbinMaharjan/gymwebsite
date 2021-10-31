@@ -7,11 +7,28 @@ import { Link } from "react-router-dom";
 import NavBar from "../../components/NabBar";
 import Footer from "../../components/footer/footer";
 
+import { useDispatch } from "react-redux";
+import { addSuperAdminToApi } from "../../store/actions/superAdmin";
+
 const RegisterAdmin = (props) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [mobile, setMobile] = useState("");
+
+  const dispatch = useDispatch();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const superAdmin = {
+      name,
+      email,
+      password,
+      mobile,
+      role: "SuperAdmin",
+    };
+    dispatch(addSuperAdminToApi(superAdmin));
+  };
   return (
     <>
       <NavBar />
@@ -26,7 +43,7 @@ const RegisterAdmin = (props) => {
         <div className="screenright">
           <h4>Admin Registers</h4>
           <Image src={admin} className="adminpic" roundedCircle />
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <Label for="Name">Name</Label>
             <Input
               type="name"
