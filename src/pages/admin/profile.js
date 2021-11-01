@@ -1,28 +1,36 @@
 import React from "react";
-import axios from "axios";
+// import axios from "axios";
 
-import { AdminToken, BASE_URL } from "../../API/config";
+// import { AdminToken, BASE_URL } from "../../API/config";
 
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 
 import { Typography } from "@mui/material";
 
 import DrawerAdmin from "../../components/Drawer/Drawer";
 import Footer from "../../components/footer/footer";
 import { UI } from "../../components/profile/profile";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllSuperAdmins } from "../../store/actions/superAdmin";
 
 const Profile = (props) => {
-  const [admin, setAdmin] = useState([]);
-  useEffect(() => {
-    getAdmin();
-  }, []);
+  const dispatch = useDispatch();
+  const admin = useSelector((state) => state.superAdminsState.superAdmins);
+  React.useEffect(() => {
+    dispatch(getAllSuperAdmins());
+  }, [dispatch]);
 
-  const getAdmin = async () => {
-    const res = await axios.get(`${BASE_URL}/admin/adminprofile`, {
-      headers: { Authorization: `${AdminToken}` },
-    });
-    setAdmin(res.data.result);
-  };
+  // const [admin, setAdmin] = useState([]);
+  // useEffect(() => {
+  //   getAdmin();
+  // }, []);
+
+  // const getAdmin = async () => {
+  //   const res = await axios.get(`${BASE_URL}/admin/adminprofile`, {
+  //     headers: { Authorization: `${AdminToken}` },
+  //   });
+  //   setAdmin(res.data.result);
+  // };
   return (
     <>
       <DrawerAdmin />
