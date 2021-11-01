@@ -10,6 +10,7 @@ import AdminRoutes from "./routes/adminroutes";
 
 import { Provider } from "react-redux";
 import store from "./store/index";
+import GymOwnerLogin from "./pages/client/gymOwnerLogin";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route exact path="/admin/login" component={Login} />
           <Route exact path="/admin/register" component={RegisterAdmin} />
+          <Route exact path="/gymowner/login" component={GymOwnerLogin} />
           <AdminRoutes />
         </Switch>
       </BrowserRouter>

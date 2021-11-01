@@ -1,0 +1,69 @@
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+Label {
+  margin: 10px;
+}
+Input {
+  margin: 10px;
+  padding: 10px;
+}
+
+.screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  background-color: black;
+  margin-top: 55px;
+  width: 100%;
+  height: 559px;
+}
+
+.screenleft {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(245, 46, 105);
+  width: 100%;
+  height: 100%;
+  margin: 2px;
+}
+.screenright {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: gainsboro;
+  width: 100%;
+  height: 100%;
+  margin: 2px;
+  padding: 5px;
+}
+
+.image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.adminpic {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 20%;
+  width: 20%;
+  padding: 10px;
+}
+
+p {
+  font-weight: bold;
+}
