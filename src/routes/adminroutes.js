@@ -8,9 +8,9 @@ import GymExercise from "../pages/admin/gymExercise";
 import Profile from "../pages/admin/profile";
 
 const AdminRoutes = (props) => {
-  if (!localStorage.getItem("token")) {
-    return (window.location.href = "/");
-  }
+  // if (!localStorage.getItem("token")) {
+  //   return (window.location.href = "/");
+  // }
   return (
     <BrowserRouter>
       <Switch>

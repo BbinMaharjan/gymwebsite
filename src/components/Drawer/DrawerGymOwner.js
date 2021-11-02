@@ -18,7 +18,6 @@ import ListItemText from "@mui/material/ListItemText";
 import { useHistory } from "react-router-dom";
 
 import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
-import FitnessCenterRoundedIcon from "@mui/icons-material/FitnessCenterRounded";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import SettingsIcon from "@mui/icons-material/Settings";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -171,25 +170,21 @@ export default function MiniDrawer() {
             <ListItemText primary="GymOwner Dashboard" />
           </ListItem>
 
-          <ListItem button onClick={() => history.push("/admin/gymowners")}>
+          <ListItem
+            button
+            onClick={() => history.push("/gymowner/addgymmeber")}
+          >
             <ListItemIcon>
               <AdminPanelSettingsRoundedIcon />
             </ListItemIcon>
-            <ListItemText primary="Gym Owners" />
+            <ListItemText primary="Add GymMembers" />
           </ListItem>
 
-          <ListItem button onClick={() => history.push("/admin/gymmembers")}>
+          <ListItem button onClick={() => history.push("/gymowner/gymmembers")}>
             <ListItemIcon>
               <AccountCircleIcon />
             </ListItemIcon>
             <ListItemText primary="Gym Members" />
-          </ListItem>
-
-          <ListItem button onClick={() => history.push("/admin/gymexercises")}>
-            <ListItemIcon>
-              <FitnessCenterRoundedIcon />
-            </ListItemIcon>
-            <ListItemText primary="Gym Exercises" />
           </ListItem>
 
           <ListItem button onClick={() => history.push("/gymowner/profile")}>

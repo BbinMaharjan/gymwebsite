@@ -25,7 +25,8 @@ function App() {
           <Route exact path="/gymowner/login" component={GymOwnerLogin} />
           <Route exact path="/gymowner/register" component={RegisterGymOwner} />
           <Route exact path="/admin/dashboard" component={AdminRoutes} />
-          <Route exact path="/gymowner/dashboard" component={GymOwnerRoute} />
+          <GymOwnerRoute />
+          {/* <Route exact path="/gymowner/dashboard" component={GymOwnerRoute} /> */}
         </Switch>
       </BrowserRouter>
       {/* <GymOwnerRoute />
