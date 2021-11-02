@@ -1,15 +1,19 @@
 import React, { useState } from "react";
-import { Button, Form, Label, Input } from "reactstrap";
+import {
+  Button,
+  Form,
+  Label,
+  Input,
+  FormGroup,
+  FormFeedback,
+} from "reactstrap";
 import "./login.css";
 import { Link } from "react-router-dom";
-import admin from "../../image/icon.png";
+import admin from "../../image/gymsport.png";
 import { Image } from "react-bootstrap";
 import NavBar from "../../components/NabBar";
 import Footer from "../../components/footer/footer";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
-
-import { BASE_URL } from "../../API/config";
 
 const GymOwnerLogin = (props) => {
   const [email, setEmail] = useState("");
@@ -18,17 +22,7 @@ const GymOwnerLogin = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await axios.post(`${BASE_URL}/admin/login`, {
-      email,
-      password,
-    });
-    console.log(res);
-    if (res.data.token) {
-      await localStorage.setItem("token", res.data.token);
-      history.push("/admin/dashboard");
-    } else {
-      alert("User Not Found");
-    }
+    history.push("/gymowner/dashboard");
   };
 
   return (
@@ -46,15 +40,25 @@ const GymOwnerLogin = (props) => {
           <h4>Log In to GymOwner Dashboard</h4>
           <Image src={admin} className="adminpic" roundedCircle />
           <Form onSubmit={handleSubmit}>
-            <Label for="Email">Email</Label>
-            <Input
-              type="email"
-              name="email"
-              id="email"
-              value={email}
-              onChange={(text) => setEmail(text.target.value)}
-              placeholder="Email"
-            />
+            <FormGroup>
+              <Label for="Email">Email</Label>
+              <Input
+                type="email"
+                name="email"
+                id="email"
+                value={email}
+                onChange={(text) => setEmail(text.target.value)}
+                placeholder="Email"
+                valid
+              />
+              {email === "leon@gmail.com" ? (
+                <FormFeedback valid>Email is available</FormFeedback>
+              ) : (
+                <FormFeedback valid style={{ color: "red" }}>
+                  Email Not is available
+                </FormFeedback>
+              )}
+            </FormGroup>
             <Label for="Password">Password</Label>
             <Input
               type="password"
@@ -64,12 +68,13 @@ const GymOwnerLogin = (props) => {
               onChange={(text) => setPassword(text.target.value)}
               placeholder="password"
             />
+
             <Button color="success" style={{ margin: "10px" }}>
               L O G I N
             </Button>
           </Form>
           <p>
-            Don't have account ? <Link to="/admin/register">Register</Link>{" "}
+            Don't have account ? <Link to="/gymowner/register">Register</Link>{" "}
           </p>
         </div>
       </div>
