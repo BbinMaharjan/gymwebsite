@@ -1,9 +1,4 @@
 import React from "react";
-import axios from "axios";
-
-import { AdminToken, BASE_URL } from "../../API/config";
-
-import { useEffect, useState } from "react";
 
 import { Typography } from "@mui/material";
 
@@ -13,19 +8,15 @@ import { Table, Button } from "reactstrap";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
+import { useDispatch, useSelector } from "react-redux";
+import { getAllGymMembers } from "../../store/actions/gymOwner";
+
 const GymMembers = () => {
-  const [members, setMembers] = useState([]);
-
-  useEffect(() => {
-    getMembers();
-  }, []);
-
-  const getMembers = async () => {
-    const res = await axios.get(`${BASE_URL}/admin/gymmembers`, {
-      headers: { Authorization: `${AdminToken}` },
-    });
-    setMembers(res.data.Member);
-  };
+  const dispatch = useDispatch();
+  const gymMembers = useSelector((state) => state.gymOwnersState.gymMembers);
+  React.useEffect(() => {
+    dispatch(getAllGymMembers());
+  }, [dispatch]);
   return (
     <>
       <div className="container">
@@ -56,7 +47,7 @@ const GymMembers = () => {
               textAlign: "center",
             }}
           >
-            {members.map((members) => {
+            {gymMembers.map((members) => {
               return (
                 <tr key={members._id}>
                   <th scope="row">{members.membershipNo}</th>

@@ -3,6 +3,7 @@ import { BASE_URL, AdminToken } from "../../API/config";
 
 export const LOGIN_GYMOWNER = "LOGIN_GYMOWNER";
 export const GET_GYMOWNERS = "GET_GYMOWNERS";
+export const GET_GYMMEMBERS = "GET_GYMMEMBERS";
 
 const loginGymOwner = (gymOwner) => {
   return {
@@ -15,6 +16,13 @@ const getGymOwners = (gymOwners) => {
   return {
     type: GET_GYMOWNERS,
     payload: gymOwners,
+  };
+};
+
+const getGymMembers = (gymMembers) => {
+  return {
+    type: GET_GYMMEMBERS,
+    payload: gymMembers,
   };
 };
 
@@ -35,4 +43,13 @@ export const getAllGymOwners = (gymOwners) => async (dispatch) => {
   });
   gymOwners = response.data.result;
   dispatch(getGymOwners(gymOwners));
+};
+
+export const getAllGymMembers = (gymMembers) => async (dispatch) => {
+  const response = await axios.get(`${BASE_URL}/members`, {
+    headers: { Authorization: `${AdminToken}` },
+  });
+  gymMembers = response.data.Member;
+  // console.log("action", gymMembers);
+  dispatch(getGymMembers(gymMembers));
 };

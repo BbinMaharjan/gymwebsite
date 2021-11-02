@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Typography } from "@mui/material";
-import { useHistory } from "react-router-dom";
 import { Form, FormGroup, Label, Col, Input, Button } from "reactstrap";
 const AddGymMemeber = (props) => {
   const [membershipno, setMembershipno] = useState("");
@@ -12,7 +11,6 @@ const AddGymMemeber = (props) => {
   const [mobile, setMobile] = useState("");
   const [joinDate, setJoinDate] = useState("");
   const [sift, setSift] = useState("");
-  const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
