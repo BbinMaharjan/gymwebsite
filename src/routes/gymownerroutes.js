@@ -5,6 +5,9 @@ import DashboardGymOwner from "../pages/client/dashboardGO";
 import ProfileGymOwner from "../pages/client/profileGymOwner";
 
 const GymOwnerRoute = (props) => {
+  if (!localStorage.getItem("token")) {
+    return (window.location.href = "/");
+  }
   return (
     <BrowserRouter>
       <Switch>

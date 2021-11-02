@@ -11,14 +11,14 @@ import DrawerGymOwner from "../../components/Drawer/DrawerGymOwner";
 import Footer from "../../components/footer/footer";
 import { UI } from "../../components/profile/profile";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllSuperAdmins } from "../../store/actions/superAdmin";
+import { getAllGymOwners } from "../../store/actions/gymOwner";
 
 const ProfileGymOwner = (props) => {
-  //   const dispatch = useDispatch();
-  //   const admin = useSelector((state) => state.superAdminsState.superAdmins);
-  //   React.useEffect(() => {
-  //     dispatch(getAllSuperAdmins());
-  //   }, [dispatch]);
+  const dispatch = useDispatch();
+  const gymOnwer = useSelector((state) => state.gymOwnersState.gymOwners);
+  React.useEffect(() => {
+    dispatch(getAllGymOwners());
+  }, [dispatch]);
 
   // const [admin, setAdmin] = useState([]);
   // useEffect(() => {
@@ -39,14 +39,13 @@ const ProfileGymOwner = (props) => {
           {" "}
           GymOwner Profile
         </Typography>
-        {/* <UI
-          image={admin.name}
-          id={admin.role}
-          name={admin.name}
-          email={admin.email}
-          mobile={admin.mobile}
-        /> */}
-        <UI />
+        <UI
+          image={gymOnwer.name}
+          id={gymOnwer.role}
+          name={gymOnwer.name}
+          email={gymOnwer.email}
+          mobile={gymOnwer.mobile}
+        />
       </div>
       <Footer />
     </>

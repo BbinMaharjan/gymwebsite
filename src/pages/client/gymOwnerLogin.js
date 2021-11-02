@@ -14,14 +14,23 @@ import { Image } from "react-bootstrap";
 import NavBar from "../../components/NabBar";
 import Footer from "../../components/footer/footer";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { loginAllGymOwner } from "../../store/actions/gymOwner";
 
 const GymOwnerLogin = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
 
+  const dispatch = useDispatch();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const gymOwner = {
+      email,
+      password,
+    };
+    dispatch(loginAllGymOwner(gymOwner));
     history.push("/gymowner/dashboard");
   };
 
