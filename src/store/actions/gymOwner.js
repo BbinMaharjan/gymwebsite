@@ -5,6 +5,7 @@ export const LOGIN_GYMOWNER = "LOGIN_GYMOWNER";
 export const GET_GYMOWNERS = "GET_GYMOWNERS";
 export const GET_GYMMEMBERS = "GET_GYMMEMBERS";
 export const ADD_GYMMEMBER = "ADD_GYMMEMBER";
+export const DELETE_GYMMEMBER = "DELETE_GYMMEMBER";
 
 const loginGymOwner = (gymOwner) => {
   return {
@@ -31,6 +32,13 @@ const addGymMember = (gymMember) => {
   return {
     type: ADD_GYMMEMBER,
     payload: gymMember,
+  };
+};
+
+const deleteGymMember = (gymMemberid) => {
+  return {
+    type: DELETE_GYMMEMBER,
+    payload: gymMemberid,
   };
 };
 
@@ -73,4 +81,15 @@ export const addAllGymMember = (gymMember) => async (dispatch) => {
   gymMember = response.data.member;
   console.log("action", gymMember);
   dispatch(addGymMember(gymMember));
+};
+
+export const deletesGymMember = (gymMemberid) => async (dispatch) => {
+  const response = await axios.delete(
+    `${BASE_URL}/members/gymmembers/${gymMemberid}`,
+    {
+      headers: { Authorization: `${AdminToken}` },
+    }
+  );
+  gymMemberid = response.data;
+  dispatch(deleteGymMember(gymMemberid));
 };

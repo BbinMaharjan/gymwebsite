@@ -3,6 +3,7 @@ import {
   GET_GYMOWNERS,
   GET_GYMMEMBERS,
   ADD_GYMMEMBER,
+  DELETE_GYMMEMBER,
 } from "../actions/gymOwner";
 
 const initialState = {
@@ -10,6 +11,7 @@ const initialState = {
   gymOwner: {},
   gymMembers: [],
   gymMember: [],
+  gymMemberid: [],
 };
 
 const gymOwnerReducer = (state = initialState, action) => {
@@ -33,6 +35,11 @@ const gymOwnerReducer = (state = initialState, action) => {
       return {
         ...state,
         gymMember: action.payload,
+      };
+    case DELETE_GYMMEMBER:
+      return {
+        ...state,
+        gymMemberid: action.payload,
       };
     default:
       return state;

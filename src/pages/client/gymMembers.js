@@ -9,14 +9,31 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getAllGymMembers } from "../../store/actions/gymOwner";
+import {
+  getAllGymMembers,
+  deletesGymMember,
+} from "../../store/actions/gymOwner";
+import { useHistory } from "react-router";
 
 const GymMembers = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
+
   const gymMembers = useSelector((state) => state.gymOwnersState.gymMembers);
+
+  const handleDelete = async (id) => {
+    dispatch(deletesGymMember(id));
+    history.push("/gymwoner/gymmembers");
+  };
+
+  const handleUpdate = (id) => {
+    console.log(id);
+  };
+
   React.useEffect(() => {
     dispatch(getAllGymMembers());
   }, [dispatch]);
+
   return (
     <>
       <div className="container">
@@ -47,25 +64,40 @@ const GymMembers = () => {
               textAlign: "center",
             }}
           >
-            {gymMembers.map((members) => {
-              return (
-                <tr key={members._id}>
-                  <th scope="row">{members.membershipNo}</th>
-                  <td>
-                    {" "}
-                    <Avatar name={members.name} size="40" round={true} />
-                  </td>
-                  <td>{members.name}</td>
-                  <td>{members.email}</td>
-                  <td>{members.address}</td>
-                  <td>{members.mobile}</td>
-                  <td>
-                    <Button color="success">Update</Button>{" "}
-                    <Button color="danger">Delete</Button>
-                  </td>
-                </tr>
-              );
-            })}
+            {gymMembers &&
+              gymMembers.map((members) => {
+                return (
+                  <tr key={members._id}>
+                    <th scope="row">{members.membershipNo}</th>
+                    <td>
+                      {" "}
+                      <Avatar name={members.name} size="40" round={true} />
+                    </td>
+                    <td>{members.name}</td>
+                    <td>{members.email}</td>
+                    <td>{members.address}</td>
+                    <td>{members.mobile}</td>
+                    <td>
+                      <Button
+                        color="success"
+                        onClick={() => {
+                          handleUpdate(members._id);
+                        }}
+                      >
+                        Update
+                      </Button>{" "}
+                      <Button
+                        color="danger"
+                        onClick={() => {
+                          handleDelete(members._id);
+                        }}
+                      >
+                        Delete
+                      </Button>
+                    </td>
+                  </tr>
+                );
+              })}
           </tbody>
         </Table>
         <Stack spacing={2} alignItems="center">
