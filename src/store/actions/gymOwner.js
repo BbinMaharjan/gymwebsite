@@ -4,6 +4,7 @@ import { BASE_URL, AdminToken } from "../../API/config";
 export const LOGIN_GYMOWNER = "LOGIN_GYMOWNER";
 export const GET_GYMOWNERS = "GET_GYMOWNERS";
 export const GET_GYMMEMBERS = "GET_GYMMEMBERS";
+export const ADD_GYMMEMBER = "ADD_GYMMEMBER";
 
 const loginGymOwner = (gymOwner) => {
   return {
@@ -26,6 +27,13 @@ const getGymMembers = (gymMembers) => {
   };
 };
 
+const addGymMember = (gymMember) => {
+  return {
+    type: ADD_GYMMEMBER,
+    payload: gymMember,
+  };
+};
+
 export const loginAllGymOwner = (gymOwner) => async (dispatch) => {
   const response = await axios.post(`${BASE_URL}/users/login`, gymOwner);
   gymOwner = response.data.token;
@@ -33,7 +41,7 @@ export const loginAllGymOwner = (gymOwner) => async (dispatch) => {
     await localStorage.setItem("token", gymOwner);
     dispatch(loginGymOwner(gymOwner));
   } else {
-    alert("user Not Found");
+    alert("User Not Found");
   }
 };
 
@@ -52,4 +60,17 @@ export const getAllGymMembers = (gymMembers) => async (dispatch) => {
   gymMembers = response.data.Member;
   // console.log("action", gymMembers);
   dispatch(getGymMembers(gymMembers));
+};
+
+export const addAllGymMember = (gymMember) => async (dispatch) => {
+  const response = await axios.post(
+    `${BASE_URL}/members/addmember`,
+    gymMember,
+    {
+      headers: { Authorization: `${AdminToken}` },
+    }
+  );
+  gymMember = response.data.member;
+  console.log("action", gymMember);
+  dispatch(addGymMember(gymMember));
 };

@@ -2,12 +2,14 @@ import {
   LOGIN_GYMOWNER,
   GET_GYMOWNERS,
   GET_GYMMEMBERS,
+  ADD_GYMMEMBER,
 } from "../actions/gymOwner";
 
 const initialState = {
   gymOwners: [],
   gymOwner: {},
   gymMembers: [],
+  gymMember: [],
 };
 
 const gymOwnerReducer = (state = initialState, action) => {
@@ -26,6 +28,11 @@ const gymOwnerReducer = (state = initialState, action) => {
       return {
         ...state,
         gymMembers: action.payload,
+      };
+    case ADD_GYMMEMBER:
+      return {
+        ...state,
+        gymMember: action.payload,
       };
     default:
       return state;

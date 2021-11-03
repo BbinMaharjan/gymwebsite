@@ -13,14 +13,13 @@ import admin from "../../image/gymsport.png";
 import { Image } from "react-bootstrap";
 import NavBar from "../../components/NabBar";
 import Footer from "../../components/footer/footer";
-import { useHistory } from "react-router-dom";
+
 import { useDispatch } from "react-redux";
 import { loginAllGymOwner } from "../../store/actions/gymOwner";
 
 const GymOwnerLogin = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const history = useHistory();
 
   const dispatch = useDispatch();
 
@@ -30,8 +29,8 @@ const GymOwnerLogin = (props) => {
       email,
       password,
     };
-    dispatch(loginAllGymOwner(gymOwner));
-    history.push("/gymowner/dashboard");
+    await dispatch(loginAllGymOwner(gymOwner));
+    window.location.href = "/gymowner/dashboard";
   };
 
   return (

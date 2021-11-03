@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { Typography } from "@mui/material";
 import { Form, FormGroup, Label, Col, Input, Button } from "reactstrap";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addAllGymMember } from "../../store/actions/gymOwner";
 const AddGymMemeber = (props) => {
-  const [membershipno, setMembershipno] = useState("");
+  const [membershipNo, setMembershipno] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
@@ -12,8 +15,24 @@ const AddGymMemeber = (props) => {
   const [joinDate, setJoinDate] = useState("");
   const [sift, setSift] = useState("");
 
+  const history = useHistory();
+  const dispatch = useDispatch();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const gymMember = {
+      membershipNo,
+      name,
+      email,
+      address,
+      gender,
+      dob,
+      mobile,
+      joinDate,
+      sift,
+    };
+    await dispatch(addAllGymMember(gymMember));
+    history.push("/gymowner/gymmembers");
   };
   return (
     <>
@@ -34,7 +53,7 @@ const AddGymMemeber = (props) => {
                 name="membershipno"
                 placeholder="001"
                 type="number"
-                value={membershipno}
+                value={membershipNo}
                 onChange={(text) => setMembershipno(text.target.value)}
               />
             </Col>
