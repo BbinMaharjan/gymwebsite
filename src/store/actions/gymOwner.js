@@ -1,12 +1,14 @@
 import axios from "axios";
 import { BASE_URL, AdminToken } from "../../API/config";
 
+// Actions Types
 export const LOGIN_GYMOWNER = "LOGIN_GYMOWNER";
 export const GET_GYMOWNERS = "GET_GYMOWNERS";
 export const GET_GYMMEMBERS = "GET_GYMMEMBERS";
 export const ADD_GYMMEMBER = "ADD_GYMMEMBER";
 export const DELETE_GYMMEMBER = "DELETE_GYMMEMBER";
 
+// Action Generators
 const loginGymOwner = (gymOwner) => {
   return {
     type: LOGIN_GYMOWNER,

@@ -10,8 +10,6 @@ const initialState = {
   gymOwners: [],
   gymOwner: {},
   gymMembers: [],
-  gymMember: [],
-  gymMemberid: [],
 };
 
 const gymOwnerReducer = (state = initialState, action) => {
@@ -32,14 +30,16 @@ const gymOwnerReducer = (state = initialState, action) => {
         gymMembers: action.payload,
       };
     case ADD_GYMMEMBER:
+      const gymMember = [action.payload, ...state.gymMembers];
       return {
         ...state,
-        gymMember: action.payload,
+        gymMembers: gymMember,
       };
     case DELETE_GYMMEMBER:
+      const gymMemberid = [action.payload, ...state.gymMembers];
       return {
         ...state,
-        gymMemberid: action.payload,
+        gymMember: gymMemberid,
       };
     default:
       return state;
