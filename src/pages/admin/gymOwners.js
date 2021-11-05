@@ -9,23 +9,23 @@ import DrawerAdmin from "../../components/Drawer/Drawer";
 import Footer from "../../components/footer/footer";
 
 import Avatar from "react-avatar";
-import { Table, Button, Form, Label, Input } from "reactstrap";
+import { Table, Button, Label, Input, Form } from "reactstrap";
 import { useEffect, useState } from "react";
 
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
 import { Modal } from "react-bootstrap";
+import { useHistory } from "react-router";
 
 const GymOwner = (props) => {
   const [gymOwner, setGymOwner] = useState([]);
-  const [newgymTitle, setgymTitle] = useState([]);
+  const [address, setaddress] = useState("");
   const [show, setShow] = useState(false);
+  const [gymOwnerId, setgymOwnerId] = useState({});
 
+  const history = useHistory();
   const handleClose = () => setShow(false);
-  const handleShow = async (id) => {
-    setShow(true);
-  };
 
   useEffect(() => {
     getGymOwners();
@@ -38,17 +38,26 @@ const GymOwner = (props) => {
     //console.log("get gym owners", res);
     setGymOwner(res.data.result);
   };
-
-  // const handelUpdate = async (id) => {
-  //   const res = await axios.put(
-  //     `${BASE_URL}/admin/gymowners/updategymowner/${id}`,
-  //     { gymTitle: newgymTitle },
-  //     {
-  //       headers: { Authorization: `${AdminToken}` },
-  //     }
-  //   );
-  //   console.log(res);
-  // };
+  const openModal = (id) => {
+    setShow(true);
+    const gymOneOwner = gymOwner.find((gymOwner) => gymOwner._id === id);
+    setgymOwnerId(gymOneOwner);
+  };
+  const handleUpdate = async (id) => {
+    try {
+      const res = await axios.put(
+        `${BASE_URL}/admin/gymowners/updategymowner/${id}`,
+        { gymLocation: address },
+        {
+          headers: { Authorization: `${AdminToken}` },
+        }
+      );
+      console.log(res);
+      history.push("/admin/gymowners");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <DrawerAdmin />
@@ -95,7 +104,12 @@ const GymOwner = (props) => {
                   <td>{gymOwner.gymTitle}</td>
                   <td>{gymOwner.gymLocation}</td>
                   <td>
-                    <Button color="info" onClick={handleShow}>
+                    <Button
+                      color="info"
+                      onClick={() => {
+                        openModal(gymOwner._id);
+                      }}
+                    >
                       Update
                     </Button>
                   </td>
@@ -104,36 +118,38 @@ const GymOwner = (props) => {
             })}
           </tbody>
         </Table>
-        <Modal show={show} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Update Gym Owner</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Form>
-              <Label for="gymTitle">New Gym Title</Label>
-              <Input
-                type="gymTitle"
-                name="gymTitle"
-                id="gymTitle"
-                value={newgymTitle}
-                onChange={(text) => setgymTitle(text.target.value)}
-                placeholder="new"
-              />
-              <Button color="success" style={{ margin: "10px" }}>
-                UPDATE
-              </Button>
-            </Form>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-          </Modal.Footer>
-        </Modal>
         <Stack spacing={2} alignItems="center">
           <Pagination count={2} color="secondary" />
         </Stack>
       </div>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Update GymOwner</Modal.Title>
+        </Modal.Header>
+        <Form
+          onSubmit={() => {
+            handleUpdate(gymOwnerId._id);
+          }}
+        >
+          <Modal.Body>
+            <Label>Address</Label>
+            <Input
+              bsSize="sm"
+              id="address"
+              name="address"
+              placeholder={gymOwnerId.gymLocation}
+              type="text"
+              value={address}
+              onChange={(text) => setaddress(text.target.value)}
+            />
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" type="submit">
+              Save Changes
+            </Button>
+          </Modal.Footer>
+        </Form>
+      </Modal>
       <Footer />
     </>
   );
