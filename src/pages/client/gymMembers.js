@@ -1,9 +1,10 @@
-import React from "react";
-
+import React, { useState } from "react";
+import axios from "axios";
 import { Typography } from "@mui/material";
-
+import { BASE_URL, AdminToken } from "../../API/config";
 import Avatar from "react-avatar";
-import { Table, Button } from "reactstrap";
+import { Table, Button, Label, Input } from "reactstrap";
+import { Modal } from "react-bootstrap";
 
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
@@ -16,6 +17,11 @@ import {
 import { useHistory } from "react-router";
 
 const GymMembers = () => {
+  const [show, setShow] = useState(false);
+  const [member, setMember] = useState({});
+  const [address, setaddress] = useState("");
+
+  const handleClose = () => setShow(false);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -26,8 +32,22 @@ const GymMembers = () => {
     history.push("/gymwoner/gymmembers");
   };
 
-  const handleUpdate = (id) => {
-    console.log(id);
+  const handleUpdate = (ids) => {
+    setShow(true);
+    const gymMember = gymMembers.find((gymMembers) => gymMembers._id === ids);
+    setMember(gymMember);
+  };
+  const handleSave = async (id) => {
+    // console.log("data", id, data);
+    const res = await axios.put(
+      `${BASE_URL}/members/gymmembers/${id}`,
+      { address },
+      {
+        headers: { Authorization: `${AdminToken}` },
+      }
+    );
+    console.log(res);
+    window.location.href = "/gymwoner/gymmembers/";
   };
 
   React.useEffect(() => {
@@ -104,6 +124,35 @@ const GymMembers = () => {
           <Pagination count={3} color="secondary" />
         </Stack>
       </div>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Update Member</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <Label>Address</Label>
+          <Input
+            bsSize="sm"
+            id="address"
+            name="address"
+            placeholder={member.address}
+            type="text"
+            value={address}
+            onChange={(text) => setaddress(text.target.value)}
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="primary"
+            type="submit"
+            onClick={() => {
+              handleSave(member._id);
+            }}
+          >
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };
