@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { Typography } from "@mui/material";
-import { BASE_URL, AdminToken } from "../../API/config";
+
 import Avatar from "react-avatar";
 import { Table, Button, Label, Input } from "reactstrap";
 import { Modal } from "react-bootstrap";
@@ -13,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getAllGymMembers,
   deletesGymMember,
+  updatesGymMember,
 } from "../../store/actions/gymOwner";
 import { useHistory } from "react-router";
 
@@ -39,15 +39,19 @@ const GymMembers = () => {
   };
   const handleSave = async (id) => {
     // console.log("data", id, data);
-    const res = await axios.put(
-      `${BASE_URL}/members/gymmembers/${id}`,
-      { address },
-      {
-        headers: { Authorization: `${AdminToken}` },
-      }
-    );
-    console.log(res);
-    window.location.href = "/gymwoner/gymmembers/";
+    const data = {
+      address,
+    };
+    // const res = await axios.put(
+    //   `${BASE_URL}/members/gymmembers/${id}`,
+    //   { address: data.address },
+    //   {
+    //     headers: { Authorization: `${AdminToken}` },
+    //   }
+    // );
+    // console.log({ res });
+    dispatch(updatesGymMember(id, data));
+    history.push("/gymwoner/gymmembers");
   };
 
   React.useEffect(() => {

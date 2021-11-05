@@ -7,6 +7,7 @@ export const GET_GYMOWNERS = "GET_GYMOWNERS";
 export const GET_GYMMEMBERS = "GET_GYMMEMBERS";
 export const ADD_GYMMEMBER = "ADD_GYMMEMBER";
 export const DELETE_GYMMEMBER = "DELETE_GYMMEMBER";
+export const UPDATE_GYMMEMBER = "UPDATE_GYMMEMBER";
 
 // Action Generators
 const loginGymOwner = (gymOwner) => {
@@ -40,6 +41,12 @@ const addGymMember = (gymMember) => {
 const deleteGymMember = (gymMemberid) => {
   return {
     type: DELETE_GYMMEMBER,
+    payload: gymMemberid,
+  };
+};
+const updateGymMember = (gymMemberid) => {
+  return {
+    type: UPDATE_GYMMEMBER,
     payload: gymMemberid,
   };
 };
@@ -94,4 +101,16 @@ export const deletesGymMember = (gymMemberid) => async (dispatch) => {
   );
   gymMemberid = response.data;
   dispatch(deleteGymMember(gymMemberid));
+};
+
+export const updatesGymMember = (gymMemberid, data) => async (dispatch) => {
+  const response = await axios.put(
+    `${BASE_URL}/members/gymmembers/${gymMemberid}`,
+    { address: data.address },
+    {
+      headers: { Authorization: `${AdminToken}` },
+    }
+  );
+  console.log({ response });
+  dispatch(updateGymMember(response));
 };

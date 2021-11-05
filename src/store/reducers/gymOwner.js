@@ -4,6 +4,7 @@ import {
   GET_GYMMEMBERS,
   ADD_GYMMEMBER,
   DELETE_GYMMEMBER,
+  UPDATE_GYMMEMBER,
 } from "../actions/gymOwner";
 
 const initialState = {
@@ -39,7 +40,13 @@ const gymOwnerReducer = (state = initialState, action) => {
       const gymMemberid = [action.payload, ...state.gymMembers];
       return {
         ...state,
-        gymMember: gymMemberid,
+        gymMembers: gymMemberid,
+      };
+    case UPDATE_GYMMEMBER:
+      const gymMemberupdateid = [action.payload, ...state.gymMembers];
+      return {
+        ...state,
+        gymMember: gymMemberupdateid,
       };
     default:
       return state;
