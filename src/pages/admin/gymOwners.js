@@ -14,19 +14,25 @@ import { useEffect, useState } from "react";
 
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+import Switch from "@mui/material/Switch";
 
 import { Modal } from "react-bootstrap";
 import { useHistory } from "react-router";
 
 const GymOwner = (props) => {
   const [gymOwner, setGymOwner] = useState([]);
-  const [address, setaddress] = useState("");
   const [show, setShow] = useState(false);
   const [gymOwnerId, setgymOwnerId] = useState({});
+
+  const [mobile, setmobile] = useState("");
+  const [gymTitle, setgymTitle] = useState("");
+  const [address, setaddress] = useState("");
+  const [isVerified, setisVerified] = useState();
 
   const history = useHistory();
   const handleClose = () => setShow(false);
 
+  console.log(gymOwner);
   useEffect(() => {
     getGymOwners();
   }, []);
@@ -47,12 +53,31 @@ const GymOwner = (props) => {
     try {
       const res = await axios.put(
         `${BASE_URL}/admin/gymowners/updategymowner/${id}`,
-        { gymLocation: address },
+        {
+          mobile: mobile,
+          gymTitle: gymTitle,
+          gymLocation: address,
+          isVerified: isVerified,
+        },
         {
           headers: { Authorization: `${AdminToken}` },
         }
       );
       console.log(res);
+      history.push("/admin/gymowners");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleVerified = async (id) => {
+    try {
+      await axios.put(
+        `${BASE_URL}/admin/gymowners/updategymowner/${id}`,
+        { isVerified: true },
+        {
+          headers: { Authorization: `${AdminToken}` },
+        }
+      );
       history.push("/admin/gymowners");
     } catch (error) {
       console.log(error);
@@ -75,13 +100,13 @@ const GymOwner = (props) => {
             }}
           >
             <tr>
-              <th>Id</th>
               <th>DP</th>
               <th>Name</th>
               <th>Email</th>
               <th>Mobile</th>
               <th>Gym Title</th>
               <th>Gym Location</th>
+              <th>isVerified</th>
               <th>Update</th>
             </tr>
           </thead>
@@ -93,7 +118,6 @@ const GymOwner = (props) => {
             {gymOwner.map((gymOwner) => {
               return (
                 <tr key={gymOwner._id}>
-                  <th scope="row">{gymOwner.id}</th>
                   <td>
                     {" "}
                     <Avatar name={gymOwner.name} size="40" round={true} />
@@ -103,6 +127,22 @@ const GymOwner = (props) => {
                   <td>{gymOwner.mobile}</td>
                   <td>{gymOwner.gymTitle}</td>
                   <td>{gymOwner.gymLocation}</td>
+                  <td>
+                    {gymOwner.isVerified === false ? (
+                      <Switch
+                        name="false"
+                        color="warning"
+                        onChange={() => handleVerified(gymOwner._id)}
+                      />
+                    ) : (
+                      <Switch
+                        name="true"
+                        color="warning"
+                        defaultChecked
+                        disabled
+                      />
+                    )}
+                  </td>
                   <td>
                     <Button
                       color="info"
@@ -122,7 +162,8 @@ const GymOwner = (props) => {
           <Pagination count={2} color="secondary" />
         </Stack>
       </div>
-      <Modal show={show} onHide={handleClose}>
+
+      <Modal show={show} onHide={handleClose} className="container mt-5 center">
         <Modal.Header closeButton>
           <Modal.Title>Update GymOwner</Modal.Title>
         </Modal.Header>
@@ -132,6 +173,26 @@ const GymOwner = (props) => {
           }}
         >
           <Modal.Body>
+            <Label>Mobile</Label>
+            <Input
+              bsSize="sm"
+              id="mobile"
+              name="mobile"
+              placeholder={gymOwnerId.mobile}
+              type="text"
+              value={mobile}
+              onChange={(text) => setmobile(text.target.value)}
+            />
+            <Label>Gym Title</Label>
+            <Input
+              bsSize="sm"
+              id="gymTitle"
+              name="gymTitle"
+              placeholder={gymOwnerId.gymTitle}
+              type="text"
+              value={gymTitle}
+              onChange={(text) => setgymTitle(text.target.value)}
+            />
             <Label>Address</Label>
             <Input
               bsSize="sm"
@@ -142,6 +203,29 @@ const GymOwner = (props) => {
               value={address}
               onChange={(text) => setaddress(text.target.value)}
             />
+            <Label>isVerified</Label>
+            {gymOwnerId.isVerified === false ? (
+              <Label>
+                False
+                <Switch
+                  name="false"
+                  color="warning"
+                  onChange={() => setisVerified(true)}
+                />{" "}
+                True
+              </Label>
+            ) : (
+              <Label>
+                False
+                <Switch
+                  name="true"
+                  color="warning"
+                  defaultChecked
+                  onChange={() => setisVerified(false)}
+                />
+                True
+              </Label>
+            )}
           </Modal.Body>
           <Modal.Footer>
             <Button variant="primary" type="submit">
