@@ -13,13 +13,30 @@ import admin from "../../image/gymsport.png";
 import { Image } from "react-bootstrap";
 import NavBar from "../../components/NabBar";
 import Footer from "../../components/footer/footer";
-
+import axios from "axios";
+import { BASE_URL } from "../../API/config";
+import { useHistory } from "react-router";
 const GymOwnerLogin = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const history = useHistory();
   const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const response = await axios.post(`${BASE_URL}/users/login`, {
+        email,
+        password,
+      });
+      const token = response.data.token;
+      if (token) {
+        await sessionStorage.setItem("GymOwner", token);
+        history.push("/gymowner/dashboard");
+      } else {
+        console.log("user Not Found");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
