@@ -32,7 +32,7 @@ const GymOwner = (props) => {
   const history = useHistory();
   const handleClose = () => setShow(false);
 
-  console.log(gymOwner);
+  //console.log(gymOwner);
   useEffect(() => {
     getGymOwners();
   }, []);
