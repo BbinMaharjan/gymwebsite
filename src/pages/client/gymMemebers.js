@@ -36,7 +36,18 @@ const GymMembers = () => {
   };
 
   const handleDelete = async (id) => {
-    history.push("/gymwoner/gymmembers");
+    try {
+      const response = await axios.delete(
+        `${BASE_URL}/members/gymmembers/${id}`,
+        {
+          headers: { Authorization: `${GymOwnerToken}` },
+        }
+      );
+      console.log(response.data);
+      history.push("/gymwoner/gymmembers");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleUpdate = (ids) => {
