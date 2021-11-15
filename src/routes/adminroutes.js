@@ -10,30 +10,34 @@ import DashboardGymOwner from "../pages/client/dashboardGymOwner";
 
 const AdminRoutes = (props) => {
   return (
-    <BrowserRouter>
-      {localStorage.getItem("token") ? (
-        <Switch>
-          <Route exact path="/admin/dashboard" component={Dashboard} />
-          <Route exact path="/admin/gymowners" component={GymOwner} />
-          <Route exact path="/admin/gymmembers" component={GymMembers} />
-          <Route exact path="/admin/gymexercises" component={GymExercise} />
-          <Route exact path="/admin/profile" component={Profile} />
-        </Switch>
-      ) : (
-        (window.location.href = "/")
-      )}
+    <>
       {sessionStorage.getItem("GymOwner") ? (
-        <Switch>
-          <Route
-            exact
-            path="/gymowner/dashboard"
-            component={DashboardGymOwner}
-          />
-        </Switch>
+        <BrowserRouter>
+          <Switch>
+            <Route
+              exact
+              path="/gymowner/dashboard"
+              component={DashboardGymOwner}
+            />
+          </Switch>
+        </BrowserRouter>
       ) : (
         (window.location.href = "/")
       )}
-    </BrowserRouter>
+      {/* {localStorage.getItem("token") ? (
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/admin/dashboard" component={Dashboard} />
+            <Route exact path="/admin/gymowners" component={GymOwner} />
+            <Route exact path="/admin/gymmembers" component={GymMembers} />
+            <Route exact path="/admin/gymexercises" component={GymExercise} />
+            <Route exact path="/admin/profile" component={Profile} />
+          </Switch>
+        </BrowserRouter>
+      ) : (
+        (window.location.href = "/")
+      )} */}
+    </>
   );
 };
 

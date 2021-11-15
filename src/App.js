@@ -21,7 +21,6 @@ function App() {
 
         <Route exact path="/gymowner/login" component={GymOwnerLogin} />
         <Route exact path="/gymowner/register" component={RegisterGymOwner} />
-
         <Route>
           <PrivateRoutes />
         </Route>
