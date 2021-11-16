@@ -5,7 +5,7 @@ import axios from "axios";
 import { BASE_URL, GymOwnerToken } from "../../API/config";
 
 import Avatar from "react-avatar";
-import { Table, Button, Label, Input } from "reactstrap";
+import { Table, Button, Label, Input, Form } from "reactstrap";
 import { Modal } from "react-bootstrap";
 
 import Pagination from "@mui/material/Pagination";
@@ -16,8 +16,9 @@ import { useHistory } from "react-router";
 const GymMembers = () => {
   const [show, setShow] = useState(false);
   const [member, setMember] = useState({});
-  const [address, setaddress] = useState("");
   const [gymMembers, setgymMembers] = useState([]);
+  const [address, setaddress] = useState("");
+  const [mobile, setmobile] = useState("");
 
   const handleClose = () => setShow(false);
 
@@ -28,8 +29,12 @@ const GymMembers = () => {
       const response = await axios.get(`${BASE_URL}/members`, {
         headers: { Authorization: `${GymOwnerToken}` },
       });
+      const data = response.data.Member;
+
+      // let sortedData = data.sort({ membershipNo: -1 });
+      console.log({ data });
       // console.log(response);
-      setgymMembers(response.data.Member);
+      setgymMembers(data);
     } catch (error) {
       console.log(error);
     }
@@ -59,10 +64,11 @@ const GymMembers = () => {
     // console.log("data", id, data);
     const data = {
       address,
+      mobile,
     };
     const res = await axios.put(
       `${BASE_URL}/members/gymmembers/${id}`,
-      { address: data.address },
+      { address: data.address, mobile: data.mobile },
       {
         headers: { Authorization: `${GymOwnerToken}` },
       }
@@ -145,34 +151,43 @@ const GymMembers = () => {
           <Pagination count={3} color="secondary" />
         </Stack>
       </div>
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose} className="container mt-5 center">
         <Modal.Header closeButton>
-          <Modal.Title>Update Member</Modal.Title>
+          <Modal.Title>Update Gym Member</Modal.Title>
         </Modal.Header>
-
-        <Modal.Body>
-          <Label>Address</Label>
-          <Input
-            bsSize="sm"
-            id="address"
-            name="address"
-            placeholder={member.address}
-            type="text"
-            value={address}
-            onChange={(text) => setaddress(text.target.value)}
-          />
-        </Modal.Body>
-        <Modal.Footer>
-          <Button
-            variant="primary"
-            type="submit"
-            onClick={() => {
-              handleSave(member._id);
-            }}
-          >
-            Save Changes
-          </Button>
-        </Modal.Footer>
+        <Form
+          onSubmit={() => {
+            handleSave(member._id);
+          }}
+        >
+          <Modal.Body>
+            <Label>Address</Label>
+            <Input
+              bsSize="sm"
+              id="address"
+              name="address"
+              placeholder={member.address}
+              type="text"
+              value={address}
+              onChange={(text) => setaddress(text.target.value)}
+            />
+            <Label>Mobile</Label>
+            <Input
+              bsSize="sm"
+              id="mobile"
+              name="mobile"
+              placeholder={member.mobile}
+              type="text"
+              value={mobile}
+              onChange={(text) => setmobile(text.target.value)}
+            />
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" type="submit">
+              Save Changes
+            </Button>
+          </Modal.Footer>
+        </Form>
       </Modal>
     </>
   );
